@@ -1,11 +1,34 @@
 version: 0.1
 component: build
-timeoutInSeconds: 10000
+timeoutInSeconds: 600
+runAs: root
+shell: bash
+env:
+  variables:
+    key: "value"
+  exportedVariables:
+    - BUILDRUN_HASH
+
 steps:
   - type: Command
-    name: build-step
-    shell: bash
-    command: ./gradlew build
+    name: "Export variables"
+    timeoutInSeconds: 40
+    command: |
+      export BUILDRUN_HASH=`echo ${OCI_BUILD_RUN_ID} | rev | cut -c 1-7`
+      echo "BUILDRUN_HASH: " $BUILDRUN_HASH
     onFailure:
       - type: Command
-        command: echo build failed
+        command: echo "build failed"
+        timeoutInSeconds: 40
+        runAs: root
+  - type: Command
+    name: "gradlew build step"
+    timeoutInSeconds: 600
+    command: |
+      cd ${OCI_WORKSPACE_DIR}/micronaut-examples/hello-world-java
+      ./gradlew build
+    onFailure:
+      - type: Command
+        command: echo "build failed"
+        timeoutInSeconds: 40
+        runAs: root
