@@ -27,7 +27,7 @@ steps:
     command: |
       cd ${OCI_WORKSPACE_DIR}/micronaut-java-build/hello-world-java
       ./gradlew build
-      echo "Wohoo build successfull"
+      echo "Wohoo build is successfull"
     onFailure:
       - type: Command
         command: echo "build failed"
