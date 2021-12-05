@@ -1,5 +1,11 @@
-phases:
-  build:
-    commands:
-      - echo Build started
-      - ./gradlew build
+version: 0.1
+component: build
+timeoutInSeconds: 10000
+steps:
+  - type: Command
+    name: build-step
+    shell: bash
+    command: ./gradlew build
+    onFailure:
+      - type: Command
+        command: echo build failed
