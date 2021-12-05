@@ -25,7 +25,7 @@ steps:
     name: "gradlew build step"
     timeoutInSeconds: 600
     command: |
-      cd ${OCI_WORKSPACE_DIR}/micronaut-examples/hello-world-java
+      cd ${OCI_WORKSPACE_DIR}/micronaut-java-build/hello-world-java
       ./gradlew build
     onFailure:
       - type: Command
