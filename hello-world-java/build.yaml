@@ -38,6 +38,7 @@ steps:
     name: "Build Container Image"
     command: |
       cd ${OCI_WORKSPACE_DIR}/micronaut-java-build/hello-world-java
+      ./gradlew build
       docker build --pull --rm -t micronaut-java -f Dockerfile .
     onFailure:
       - type: Command
