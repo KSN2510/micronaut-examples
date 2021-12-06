@@ -28,6 +28,7 @@ steps:
       cd ${OCI_WORKSPACE_DIR}/micronaut-java-build/hello-world-java
       ./gradlew clean build
       echo "Wo hoo build got successfully completed"
+      ls >> test | cat test
     onFailure:
       - type: Command
         command: echo "build failed"
@@ -39,6 +40,7 @@ steps:
     command: |
       cd ${OCI_WORKSPACE_DIR}/micronaut-java-build/hello-world-java
       ./gradlew clean build
+      ls >> test | cat test
       docker build --pull --rm -t micronaut-java -f Dockerfile .
     onFailure:
       - type: Command
