@@ -33,3 +33,24 @@ steps:
         command: echo "build failed"
         timeoutInSeconds: 40
         runAs: root
+  - type: Command
+    timeoutInSeconds: 1200
+    name: "Build Container Image"
+    command: |
+      cd ${OCI_WORKSPACE_DIR}/micronaut-java-build/hello-world-java
+      docker build --pull --rm -t micronaut-java -f Dockerfile .
+    onFailure:
+      - type: Command
+        command: |
+          echo "Handling Failure"
+          echo "Failure successfully handled"
+        timeoutInSeconds: 40
+        runAs: root
+
+outputArtifacts:
+  - name: output
+    type: DOCKER_IMAGE
+    # this location tag doesn't effect the tag used to deliver the container image
+    # to the Container Registry
+    location: micronaut-java:latest
+
