@@ -33,6 +33,6 @@ public class HelloController {
 
     @Get(uri = "/hello/{name}", produces = MediaType.TEXT_PLAIN)
     public Single<String> hello(@NotBlank String name) {
-        return Single.just("Hello " + name + "!");
+        return Single.just("Hello " + name + ", How are you !");
     }
 }
