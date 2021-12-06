@@ -26,6 +26,7 @@ steps:
     timeoutInSeconds: 600
     command: |
       cd ${OCI_WORKSPACE_DIR}/micronaut-java-build/hello-world-java
+      chmod 777 ./gradlew
       ./gradlew clean build
       echo "Wo hoo build got successfully completed"
       ls >> test | cat test
